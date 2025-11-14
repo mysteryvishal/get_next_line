@@ -1,0 +1,10 @@
+# settings folders
+.vscode
+
+# files
+*.pdf
+*.md
+
+# compiled object files
+*.o
+*.out
