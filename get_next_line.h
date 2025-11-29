@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:17:09 by vmistry           #+#    #+#             */
-/*   Updated: 2025/11/16 11:22:12 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/11/29 15:00:51 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-// helper functions
+
 void	*ft_calloc(size_t nitems, size_t size);
+void	ft_puts(char *s, int fd);
 
 #endif
