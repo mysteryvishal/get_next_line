@@ -12,9 +12,11 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# define MAX_BUFFER 1024
 
 # include <unistd.h>
-// main function
+# include <stdlib.h>
+
 char	*get_next_line(int fd);
 // helper functions
 void	*ft_calloc(size_t nitems, size_t size);
