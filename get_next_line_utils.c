@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 13:17:09 by vmistry           #+#    #+#             */
-/*   Updated: 2025/11/16 11:22:12 by vmistry          ###   ########.fr       */
+/*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
+/*   Updated: 2025/11/16 11:21:51 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# include <unistd.h>
-// main function
-char	*get_next_line(int fd);
-// helper functions
-void	*ft_calloc(size_t nitems, size_t size);
+void	*ft_calloc(size_t nitems, size_t size)
+{
+	size_t	*arr;
 
-#endif
+	if (!size || !nitems)
+		return (malloc(0));
+	if (nitems > (size_t) - 1 / size)
+		return (NULL);
+	arr = malloc(nitems * size);
+	if (!arr)
+		return (NULL);
+	ft_bzero(arr, (nitems * size));
+	return (arr);
+}
