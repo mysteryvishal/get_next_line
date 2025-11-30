@@ -6,11 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:17:09 by vmistry           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/11/29 15:52:51 by vmistry          ###   ########.fr       */
-=======
-/*   Updated: 2025/11/29 15:16:52 by vmistry          ###   ########.fr       */
->>>>>>> cbdf5f1 (fix: updated header includes to include fcntl.h)
+/*   Updated: 2025/11/29 16:35:24 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +22,9 @@
 char	*get_next_line(int fd);
 
 void	*ft_calloc(size_t nitems, size_t size);
-void	ft_puts(char *s, int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *str);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif
