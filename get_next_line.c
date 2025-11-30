@@ -6,17 +6,12 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:07:55 by vmistry           #+#    #+#             */
-/*   Updated: 2025/11/29 22:07:19 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/11/30 13:17:06 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-
-static void	fill_line_buffer(char *line, char *buffer)
-{
-	
-}
 
 char	*get_next_line(int fd)
 {
@@ -24,15 +19,18 @@ char	*get_next_line(int fd)
 	char	*line;
 	static char	*buffer;
 
-	// 1. define the line to be read.
+	// 1 >> define the line to be read.
 	line = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!line)
 		return (NULL);
-	
-	// 
+
+	// 2 >> add any remaining bytes from previous operation to line
+	ft_strjoin(line, ft_strchr(buffer, '\n'));
+
+	// 3 >> loop until a new line is found
 	while (1)
 	{
-		// 2. read a segment of the line and null terminate it
+		// 3.1 >> read a segment of the line and null terminate it
 		bytes_read = read(fd, buffer, (BUFFER_SIZE + 1));
 		if (bytes_read <= 0)
 		{
@@ -41,17 +39,16 @@ char	*get_next_line(int fd)
 		}
 		buffer[bytes_read] = '\0';
 
-		// 3. 
+		// 3.2 >> check if there's a newline in buffer
 		if (ft_strchr(buffer, '\n') != NULL)
 		{
-			set_line();
-			break;	
+			// char *temp;
+			// ft_memcpy(temp, buffer, ft_strchr(buffer, '\n'));
+			ft_strjoin(line, ft_substr(buffer, ft_strchr(buffer, '\n'), BUFFER_SIZE));
+			break;
 		}
 		else
-			fill_line_buffer();
+			ft_strjoin(line, buffer);
 	}
-	
-	
-	
-	return (NULL);
+	return (line);
 }
