@@ -6,12 +6,72 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
-/*   Updated: 2025/11/30 13:19:40 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/11/30 13:33:28 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+// static functions
+static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size)
+	{
+		while (i < (size - 1) && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	while (src[i])
+		i++;
+	return (i);
+}
+
+static char	*ft_strdup(const char *s)
+{
+	char	*s2;
+	size_t	len;
+	size_t	i;
+
+	i = 0;
+	len = ft_strlen(s) + 1;
+	s2 = malloc(len);
+	if (!s2)
+		return (NULL);
+	while (s[i])
+	{
+		s2[i] = s[i];
+		i++;
+	}
+	s2[i] = '\0';
+	return ((char *)(s2));
+}
+
+static void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	unsigned char	*to;
+	unsigned char	*from;
+	size_t			i;
+
+	if (!dst && !src)
+		return (dst);
+	to = (unsigned char *) dst;
+	from = (unsigned char *) src;
+	i = 0;
+	while (i < n)
+	{
+		to[i] = from[i];
+		i++;
+	}
+	return (to);
+}
+
+// utils functions
 void	*ft_calloc(size_t nitems, size_t size)
 {
 	size_t	*arr;
@@ -79,44 +139,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (joined_str);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
 
-	i = 0;
-	if (size)
-	{
-		while (i < (size - 1) && src[i])
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	while (src[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*s2;
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	len = ft_strlen(s) + 1;
-	s2 = malloc(len);
-	if (!s2)
-		return (NULL);
-	while (s[i])
-	{
-		s2[i] = s[i];
-		i++;
-	}
-	s2[i] = '\0';
-	return ((char *)(s2));
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
