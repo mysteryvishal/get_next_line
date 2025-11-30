@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:17:09 by vmistry           #+#    #+#             */
-/*   Updated: 2025/11/29 16:35:24 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/11/30 13:12:34 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
