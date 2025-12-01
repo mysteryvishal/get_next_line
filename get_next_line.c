@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:07:55 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/01 04:35:52 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/01 10:59:38 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 {
 	ssize_t	bytes_read;
 	char	*line;
-	static char	*buffer[BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	char	*nl;
 	char	*tmp;
 
@@ -49,8 +49,11 @@ char	*get_next_line(int fd)
 			free(line);
 			return (tmp);
 		}
-		else
-			tmp = ft_strjoin(line, buffer);
+		tmp = ft_strjoin(line, buffer);
+		free(line);
+		line = tmp;
+		if (!line)
+			return (NULL);
 	}
 	return (line);
 }
