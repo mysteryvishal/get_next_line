@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:07:55 by vmistry           #+#    #+#             */
-/*   Updated: 2025/11/30 13:17:06 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/01 04:35:52 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 char	*get_next_line(int fd)
 {
-	int	bytes_read;
+	ssize_t	bytes_read;
 	char	*line;
-	static char	*buffer;
+	static char	*buffer[BUFFER_SIZE + 1];
+	char	*nl;
+	char	*tmp;
 
 	// 1 >> define the line to be read.
 	line = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
@@ -31,8 +33,8 @@ char	*get_next_line(int fd)
 	while (1)
 	{
 		// 3.1 >> read a segment of the line and null terminate it
-		bytes_read = read(fd, buffer, (BUFFER_SIZE + 1));
-		if (bytes_read <= 0)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
 		{
 			free(line);
 			return (NULL);
@@ -40,15 +42,15 @@ char	*get_next_line(int fd)
 		buffer[bytes_read] = '\0';
 
 		// 3.2 >> check if there's a newline in buffer
-		if (ft_strchr(buffer, '\n') != NULL)
+		nl = ft_strchr(buffer, '\n');
+		if (nl)
 		{
-			// char *temp;
-			// ft_memcpy(temp, buffer, ft_strchr(buffer, '\n'));
-			ft_strjoin(line, ft_substr(buffer, ft_strchr(buffer, '\n'), BUFFER_SIZE));
-			break;
+			tmp = ft_strjoin(line, ft_substr(buffer, 0, (nl - buffer)));
+			free(line);
+			return (tmp);
 		}
 		else
-			ft_strjoin(line, buffer);
+			tmp = ft_strjoin(line, buffer);
 	}
 	return (line);
 }
