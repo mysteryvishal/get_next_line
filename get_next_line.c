@@ -6,12 +6,11 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:07:55 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/01 10:59:38 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/01 16:03:53 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
@@ -27,7 +26,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 
 	// 2 >> add any remaining bytes from previous operation to line
-	ft_strjoin(line, ft_strchr(buffer, '\n'));
+	if (*ft_strchr(buffer, '\n'))
+		ft_strjoin(line, (ft_strchr(buffer, '\n') + 1));
 
 	// 3 >> loop until a new line is found
 	while (1)
@@ -49,6 +49,8 @@ char	*get_next_line(int fd)
 			free(line);
 			return (tmp);
 		}
+
+		// 3.3 >> add segment to line
 		tmp = ft_strjoin(line, buffer);
 		free(line);
 		line = tmp;
