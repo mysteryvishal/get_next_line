@@ -6,52 +6,13 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
-/*   Updated: 2025/11/30 13:33:28 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/01 11:34:33 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 // static functions
-static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	if (size)
-	{
-		while (i < (size - 1) && src[i])
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	while (src[i])
-		i++;
-	return (i);
-}
-
-static char	*ft_strdup(const char *s)
-{
-	char	*s2;
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	len = ft_strlen(s) + 1;
-	s2 = malloc(len);
-	if (!s2)
-		return (NULL);
-	while (s[i])
-	{
-		s2[i] = s[i];
-		i++;
-	}
-	s2[i] = '\0';
-	return ((char *)(s2));
-}
-
 static void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*to;
@@ -139,12 +100,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (joined_str);
 }
 
-
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
-
+	size_t	i;
+	
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
@@ -154,6 +114,32 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substr = ft_calloc((len + 1), sizeof(char));
 	if (!substr)
 		return (NULL);
-	ft_strlcpy(substr, s + start, (len + 1));
+	i = 0;
+	while (i < len)
+	{
+		substr[i] = s[start + i];
+		i++;
+	}
+	substr[i] = '\0';
 	return (substr);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*s2;
+	size_t	len;
+	size_t	i;
+
+	i = 0;
+	len = ft_strlen(s) + 1;
+	s2 = malloc(len);
+	if (!s2)
+		return (NULL);
+	while (s[i])
+	{
+		s2[i] = s[i];
+		i++;
+	}
+	s2[i] = '\0';
+	return ((char *)(s2));
 }
