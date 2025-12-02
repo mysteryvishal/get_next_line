@@ -5,57 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 13:07:55 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/01 16:03:53 by vmistry          ###   ########.fr       */
+/*   Created: 2025/12/02 01:16:42 by vmistry           #+#    #+#             */
+/*   Updated: 2025/12/02 03:07:58 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+static void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	ssize_t	bytes_read;
-	char	*line;
-	static char	buffer[BUFFER_SIZE + 1];
+	const unsigned char	*s;
+	unsigned char		*d;
+
+	if (!dst && !src)
+		return (NULL);
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
+	if (d > s)
+		while (len-- > 0)
+			d[len] = s[len];
+	else
+		while (len--)
+			*d++ = *s++;
+	return (dst);
+}
+
+static char	*extract_line(char *buffer, char *line)
+{
 	char	*nl;
 	char	*tmp;
+	char	*remainder;
+	size_t	nl_index;
 
-	// 1 >> define the line to be read.
-	line = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	if (!line)
+	// append content before newline to line
+	nl = ft_strchr(buffer, '\n');
+	nl_index = nl - buffer;
+	remainder = ft_substr(buffer, 0, nl_index + 1);
+	tmp = ft_strjoin(line, remainder);
+	free(remainder);
+	
+	// shifting buffer
+	ft_memmove(buffer, nl + 1, ft_strlen(nl + 1) + 1);
+	return (tmp);
+}
+
+char	*get_next_line(int fd)
+{
+	ssize_t		bytes_read;
+	char		*line;
+	static char	buffer[BUFFER_SIZE + 1];
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-
-	// 2 >> add any remaining bytes from previous operation to line
-	if (*ft_strchr(buffer, '\n'))
-		ft_strjoin(line, (ft_strchr(buffer, '\n') + 1));
-
-	// 3 >> loop until a new line is found
+	line = NULL;
 	while (1)
 	{
-		// 3.1 >> read a segment of the line and null terminate it
+		if (ft_strchr(buffer, '\n') != NULL)
+			return (extract_line(buffer, line));
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
 			free(line);
 			return (NULL);
 		}
+		if (bytes_read == 0)
+			return (line);
 		buffer[bytes_read] = '\0';
-
-		// 3.2 >> check if there's a newline in buffer
-		nl = ft_strchr(buffer, '\n');
-		if (nl)
-		{
-			tmp = ft_strjoin(line, ft_substr(buffer, 0, (nl - buffer)));
-			free(line);
-			return (tmp);
-		}
-
-		// 3.3 >> add segment to line
-		tmp = ft_strjoin(line, buffer);
-		free(line);
-		line = tmp;
+		line = ft_strjoin(line, buffer);
 		if (!line)
 			return (NULL);
 	}
-	return (line);
 }
