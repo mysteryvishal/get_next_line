@@ -7,13 +7,13 @@ MAIN = test_main.c
 all:
 	$(CC) $(CFLAGS) $(SRCS) $(MAIN) -D BUFFER_SIZE=42
 
-buildtest:
-	$(CC) $(SRCS) $(MAIN)
+debug:
+	$(CC) -g $(SRCS) $(MAIN)
 
 test:
 	./a.out test_1.txt
 
 fclean:
-	$(RM) ./a.out ./get_next_line.h.*
+	$(RM) -rf ./a.out ./a.out.dSYM ./get_next_line.h.*
 
 re: fclean all

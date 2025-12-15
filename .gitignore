@@ -8,6 +8,7 @@
 # compiled object files
 *.o
 *.out
+*.out*
 *.h.gch
 
 # test files
