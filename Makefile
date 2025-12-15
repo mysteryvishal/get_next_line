@@ -1,24 +1,26 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
-SRCS = get_next_line.h get_next_line_utils.c get_next_line.c
-
+DBGFLAGS = -g -O0
+RM = rm -rf
+SRCS = get_next_line_utils.c get_next_line.c
 MAIN = test_2.c
-TEST = test_file1.txt
+OUT = test2
 
 all:
-	$(CC) $(CFLAGS) $(SRCS) $(MAIN) -D BUFFER_SIZE=42
+	$(CC) $(CFLAGS) -D BUFFER_SIZE=42 -o $(OUT) $(SRCS) $(MAIN)
 
 debug:
-	$(CC) -g $(SRCS) $(MAIN)
+	$(CC) $(DBGFLAGS) -o $(OUT) $(SRCS) $(MAIN)
 
 build:
-	$(CC) $(CFLAGS) $(SRCS) $(MAIN)
+	$(CC) $(CFLAGS) -o $(OUT) $(SRCS) $(MAIN)
 
 test:
-	./a.out $(TEST)
+	./$(OUT) test_file1.txt
 
 fclean:
-	$(RM) -rf ./a.out ./a.out.dSYM ./get_next_line.h.*
+	$(RM) ./$(OUT) ./$(OUT).dSYM
 
 re: fclean all
+
+.PHONY: all debug build test fclean re
