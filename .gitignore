@@ -3,7 +3,6 @@
 
 # files
 *.pdf
-*.md
 
 # compiled object files
 *.o
