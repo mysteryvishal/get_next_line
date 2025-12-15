@@ -10,6 +10,7 @@
 *.out
 *.out*
 *.h.gch
+*.h.pch
 
 # test files
 test_*
