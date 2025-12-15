@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:16:42 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/15 02:01:04 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/15 19:27:08 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,21 @@ static char	*extract_line(char *buffer, char *line)
 	return (tmp);
 }
 
+static ssize_t	read_into_buffer(int fd, char *buffer, char **line)
+{
+	ssize_t	bytes_read;
+
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	if (bytes_read < 0)
+	{
+		free(*line);
+		*line = NULL;
+		return (-1);
+	}
+	buffer[bytes_read] = '\0';
+	return (bytes_read);
+}
+
 char	*get_next_line(int fd)
 {
 	ssize_t		bytes_read;
@@ -59,15 +74,14 @@ char	*get_next_line(int fd)
 	{
 		if (ft_strchr(buffer, '\n') != NULL)
 			return (extract_line(buffer, line));
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		bytes_read = read_into_buffer(fd, buffer, &line);
 		if (bytes_read < 0)
-		{
-			free(line);
 			return (NULL);
-		}
 		if (bytes_read == 0)
 			return (line);
 		buffer[bytes_read] = '\0';
+		if (ft_strchr(buffer, '\n') != NULL)
+            		return (extract_line(buffer, line));
 		line = ft_strjoin(line, buffer);
 		if (!line)
 			return (NULL);
