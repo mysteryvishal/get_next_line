@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:16:42 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/02 03:07:58 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/15 02:01:04 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,11 @@ static char	*extract_line(char *buffer, char *line)
 	char	*remainder;
 	size_t	nl_index;
 
-	// append content before newline to line
 	nl = ft_strchr(buffer, '\n');
 	nl_index = nl - buffer;
 	remainder = ft_substr(buffer, 0, nl_index + 1);
 	tmp = ft_strjoin(line, remainder);
 	free(remainder);
-	
-	// shifting buffer
 	ft_memmove(buffer, nl + 1, ft_strlen(nl + 1) + 1);
 	return (tmp);
 }
