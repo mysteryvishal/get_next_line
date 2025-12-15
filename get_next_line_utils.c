@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/15 02:06:13 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/15 02:20:29 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	substr = ft_calloc((len + 1), sizeof(char));
+	substr = malloc((len + 1) * sizeof(char));
 	if (!substr)
 		return (NULL);
 	i = 0;
