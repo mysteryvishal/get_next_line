@@ -6,14 +6,17 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:17:09 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/15 02:03:38 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/15 02:27:27 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define MAX_BUFFER 1024
-# define BUFFER_SIZE 1
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 # include <unistd.h>
 # include <stdlib.h>
