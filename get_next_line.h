@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:17:09 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/01 16:24:31 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/15 02:03:38 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 char	*get_next_line(int fd);
 
-void	*ft_calloc(size_t nitems, size_t size);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);

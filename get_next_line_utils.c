@@ -6,33 +6,13 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/15 02:03:47 by vmistry          ###   ########.fr       */
+/*   Updated: 2025/12/15 02:06:13 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 // utils functions
-void	*ft_calloc(size_t nitems, size_t size)
-{
-	size_t	*arr;
-	size_t	n;
-	size_t	i;
-
-	if (!size || !nitems)
-		return (malloc(0));
-	if (nitems > (size_t) - 1 / size)
-		return (NULL);
-	arr = malloc(nitems * size);
-	if (!arr)
-		return (NULL);
-	n = nitems * size;
-	i = 0;
-	while (i < n)
-		arr[i++] = 0;
-	return (arr);
-}
-
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
@@ -94,7 +74,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	i;
-	
+
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
