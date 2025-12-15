@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
-SRCS = get_next_line.h get_next_line_utils.c get_next_line_1.c
+SRCS = get_next_line.h get_next_line_utils.c get_next_line.c
 MAIN = test_main.c
 
 all:
@@ -14,6 +14,6 @@ test:
 	./a.out test_1.txt
 
 fclean:
-	$(RM) ./a.out ./get_next_line.h.gch
+	$(RM) ./a.out ./get_next_line.h.*
 
 re: fclean all
