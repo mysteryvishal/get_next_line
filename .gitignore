@@ -12,4 +12,4 @@
 *.h.pch
 
 # test files
-test_*
+test*
