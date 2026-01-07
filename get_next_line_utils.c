@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
-/*   Updated: 2026/01/07 10:28:58 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/07 11:03:41 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,11 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*joined_str;
-	size_t	len_s1;
-	size_t	i;
-
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		s1 = "";
-	if (!s2)
-		s2 = "";
-	len_s1 = ft_strlen(s1);
-	joined_str = (char *)malloc(len_s1 + ft_strlen(s2) + 1);
-	if (!joined_str)
-		return (NULL);
-	i = 0;
-	while (i < len_s1 + ft_strlen(s2))
-	{
-		if (s1[i])
-			joined_str[i] = s1[i];
-		if (s2[i - len_s1] && i >= len_s1)
-			joined_str[i] = s2[i - len_s1];
-		i++;
-	}
-	joined_str[i] = '\0';
-	return (joined_str);
-}
-// char *ft_strjoin(const char *s1, const char *s2)
+// char	*ft_strjoin(char const *s1, char const *s2)
 // {
-// 	char *res;
-// 	int i;
-// 	int j;
+// 	char	*joined_str;
+// 	size_t	len_s1;
+// 	size_t	i;
 
 // 	if (!s1 && !s2)
 // 		return (NULL);
@@ -81,19 +53,47 @@ char	*ft_strjoin(char const *s1, char const *s2)
 // 		s1 = "";
 // 	if (!s2)
 // 		s2 = "";
-// 	i = 0;
-// 	j = 0;
-// 	res = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-// 	if (!res)
+// 	len_s1 = ft_strlen(s1);
+// 	joined_str = (char *)malloc(len_s1 + ft_strlen(s2) + 1);
+// 	if (!joined_str)
 // 		return (NULL);
-// 	while (s1[i])
-// 		res[j++] = s1[i++];
 // 	i = 0;
-// 	while (s2[i])
-// 		res[j++] = s2[i++];
-// 	res[j] = 0;
-// 	return (res);
+// 	while (i < len_s1 + ft_strlen(s2))
+// 	{
+// 		if (s1[i])
+// 			joined_str[i] = s1[i];
+// 		if (s2[i - len_s1] && i >= len_s1)
+// 			joined_str[i] = s2[i - len_s1];
+// 		i++;
+// 	}
+// 	joined_str[i] = '\0';
+// 	return (joined_str);
 // }
+char	*ft_strjoin(const char *s1, const char *s2)
+{
+	char *res;
+	int i;
+	int j;
+
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		s1 = "";
+	if (!s2)
+		s2 = "";
+	res = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		res[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		res[j++] = s2[i++];
+	res[j] = '\0';
+	return (res);
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
