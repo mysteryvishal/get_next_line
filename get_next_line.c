@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:16:42 by vmistry           #+#    #+#             */
-/*   Updated: 2025/12/15 19:27:08 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/07 10:33:29 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static ssize_t	read_into_buffer(int fd, char *buffer, char **line)
 		*line = NULL;
 		return (-1);
 	}
+	if (bytes_read == 0)
+		return (0);
 	buffer[bytes_read] = '\0';
 	return (bytes_read);
 }
