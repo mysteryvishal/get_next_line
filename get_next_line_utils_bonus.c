@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
-/*   Updated: 2026/01/07 12:42:31 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/07 13:05:35 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,6 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-// char	*ft_strjoin(char const *s1, char const *s2)
-// {
-// 	char	*joined_str;
-// 	size_t	len_s1;
-// 	size_t	i;
-
-// 	if (!s1 && !s2)
-// 		return (NULL);
-// 	if (!s1)
-// 		s1 = "";
-// 	if (!s2)
-// 		s2 = "";
-// 	len_s1 = ft_strlen(s1);
-// 	joined_str = (char *)malloc(len_s1 + ft_strlen(s2) + 1);
-// 	if (!joined_str)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < len_s1 + ft_strlen(s2))
-// 	{
-// 		if (s1[i])
-// 			joined_str[i] = s1[i];
-// 		if (s2[i - len_s1] && i >= len_s1)
-// 			joined_str[i] = s2[i - len_s1];
-// 		i++;
-// 	}
-// 	joined_str[i] = '\0';
-// 	return (joined_str);
-// }
 char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*res;
