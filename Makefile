@@ -2,14 +2,14 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 SRCS = get_next_line_utils.c get_next_line.c
-MAIN = test_2.c
-OUT = test2
+MAIN = test_main.c
+OUT = test_gnl
 
 all:
-	$(CC) $(CFLAGS) -o $(OUT) $(SRCS) $(MAIN) -D BUFFER_SIZE=42
+	$(CC) $(CFLAGS) -o $(OUT) $(SRCS) $(MAIN)
 
 debug:
-	$(CC) -g -o $(OUT) $(SRCS) $(MAIN)
+	$(CC) -g -o $(OUT) $(SRCS) $(MAIN) -D BUFFER_SIZE=42
 
 build:
 	$(CC) -o $(OUT) $(SRCS) $(MAIN)
