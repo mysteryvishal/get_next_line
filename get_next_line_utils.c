@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:20:32 by vmistry           #+#    #+#             */
-/*   Updated: 2026/01/07 11:03:41 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/07 12:04:27 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ size_t	ft_strlen(const char *str)
 // }
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char *res;
-	int i;
-	int j;
+	char	*res;
+	int		i;
+	int		j;
 
 	if (!s1 && !s2)
 		return (NULL);
