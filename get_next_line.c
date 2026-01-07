@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:16:42 by vmistry           #+#    #+#             */
-/*   Updated: 2026/01/07 11:22:47 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/07 12:24:10 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,76 +33,51 @@ static void	*ft_memmove(void *dst, const void *src, size_t len)
 static char	*extract_line(char *buffer, char *line)
 {
 	char	*nl;
-	char	*tmp;
+	char	*res;
 	char	*remainder;
-	size_t	nl_index;
 
 	nl = ft_strchr(buffer, '\n');
-	nl_index = nl - buffer;
-	remainder = ft_substr(buffer, 0, nl_index + 1);
-	tmp = ft_strjoin(line, remainder);
+	remainder = ft_substr(buffer, 0, (nl - buffer) + 1);
+	res = ft_strjoin(line, remainder);
 	free(line);
 	free(remainder);
 	ft_memmove(buffer, nl + 1, ft_strlen(nl + 1) + 1);
-	return (tmp);
+	return (res);
 }
 
-static ssize_t	read_into_buffer(int fd, char *buffer, char **line)
+int	handle_buffer(char *buffer, char **line)
 {
-	ssize_t	bytes_read;
+	char		*tmp;
 
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	if (bytes_read < 0)
-	{
-		free(*line);
-		*line = NULL;
-		return (-1);
-	}
-	if (bytes_read == 0)
+	if (ft_strchr(buffer, '\n'))
+		return (1);
+	if (buffer[0] == '\0')
 		return (0);
-	buffer[bytes_read] = '\0';
-	return (bytes_read);
-}
-
-static char	*ft_free_and_join(char *line, char *buffer)
-{
-    char	*tmp;
-
-    tmp = ft_strjoin(line, buffer);
-    free(line);
-    return (tmp);
+	tmp = *line;
+	*line = ft_strjoin(tmp, buffer);
+	free(tmp);
+	buffer[0] = '\0';
+	return (0);
 }
 
 char	*get_next_line(int fd)
 {
-	ssize_t		bytes_read;
-	char		*line;
 	static char	buffer[BUFFER_SIZE + 1];
+	char		*line;
+	ssize_t		rd;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
-	while (1)
+	rd = 1;
+	while (rd > 0)
 	{
-		if (ft_strchr(buffer, '\n') != NULL)
+		if (handle_buffer(buffer, &line))
 			return (extract_line(buffer, line));
-		if (buffer[0] != '\0')
-		{
-			line = ft_free_and_join(line, buffer);
-			if (!line)
-				return (NULL);
-			buffer[0] = '\0';
-		}
-		bytes_read = read_into_buffer(fd, buffer, &line);
-		if (bytes_read < 0)
-			return (NULL);
-		if (bytes_read == 0)
-			return (line);
-		if (ft_strchr(buffer, '\n') != NULL)
-            		return (extract_line(buffer, line));
-		line = ft_free_and_join(line, buffer);
-		if (!line)
-			return (NULL);
-		buffer[0] = '\0';
+		rd = read(fd, buffer, BUFFER_SIZE);
+		if (rd < 0)
+			return (free(line), NULL);
+		buffer[rd] = '\0';
 	}
+	return (line);
 }
