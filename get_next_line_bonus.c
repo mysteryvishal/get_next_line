@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:16:42 by vmistry           #+#    #+#             */
-/*   Updated: 2026/01/07 12:42:59 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/07 13:05:16 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		rd;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= MAX_BUFFER || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	rd = 1;
