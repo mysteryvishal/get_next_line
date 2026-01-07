@@ -13,3 +13,8 @@
 
 # test files
 test*
+
+# makefiles
+Makefile
+makefile
+GNUmakefile
