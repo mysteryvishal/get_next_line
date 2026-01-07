@@ -13,6 +13,7 @@
 
 # test files
 test*
+*Tester/
 
 # makefiles
 Makefile
