@@ -6,7 +6,7 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:16:42 by vmistry           #+#    #+#             */
-/*   Updated: 2026/01/07 10:51:56 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/07 11:22:47 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static char	*extract_line(char *buffer, char *line)
 	nl_index = nl - buffer;
 	remainder = ft_substr(buffer, 0, nl_index + 1);
 	tmp = ft_strjoin(line, remainder);
+	free(line);
 	free(remainder);
 	ft_memmove(buffer, nl + 1, ft_strlen(nl + 1) + 1);
 	return (tmp);
@@ -63,6 +64,15 @@ static ssize_t	read_into_buffer(int fd, char *buffer, char **line)
 	return (bytes_read);
 }
 
+static char	*ft_free_and_join(char *line, char *buffer)
+{
+    char	*tmp;
+
+    tmp = ft_strjoin(line, buffer);
+    free(line);
+    return (tmp);
+}
+
 char	*get_next_line(int fd)
 {
 	ssize_t		bytes_read;
@@ -78,7 +88,7 @@ char	*get_next_line(int fd)
 			return (extract_line(buffer, line));
 		if (buffer[0] != '\0')
 		{
-			line = ft_strjoin(line, buffer);
+			line = ft_free_and_join(line, buffer);
 			if (!line)
 				return (NULL);
 			buffer[0] = '\0';
@@ -90,8 +100,9 @@ char	*get_next_line(int fd)
 			return (line);
 		if (ft_strchr(buffer, '\n') != NULL)
             		return (extract_line(buffer, line));
-		line = ft_strjoin(line, buffer);
+		line = ft_free_and_join(line, buffer);
 		if (!line)
 			return (NULL);
+		buffer[0] = '\0';
 	}
 }
