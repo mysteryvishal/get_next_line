@@ -6,12 +6,12 @@
 /*   By: vmistry <vmistry@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:17:09 by vmistry           #+#    #+#             */
-/*   Updated: 2026/01/07 13:05:19 by vmistry          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:04:47 by vmistry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # define MAX_BUFFER 100
 
 # ifndef BUFFER_SIZE
